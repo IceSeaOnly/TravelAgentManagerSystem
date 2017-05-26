@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>山科旅行社</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:include="head"></div>
+<div id="adver">
+    <img th:src="@{/img/adver.jpg}" alt="">
+    <div class="center"></div>
+    <div class="center copy">
+        <form action="/search" method="post">
+            <input type="text" name="content" class="search" placeholder="请输入旅游景点或城市">
+            <button class="button" onclick="this.form.submit()">搜索</button>
+        </form>
+    </div>
+</div>
+<div id="tour">
+    <section class="center ">
+        <h2>热门旅游</h2>
+        <p>国内旅游，国外旅游、自助旅游、自驾旅游、游轮签证、主题旅游等各种最新热门旅游推介</p>
+    </section>
+    <figure th:each="line:${lines}">
+        <a th:href="'/seeLine?lid='+${line.id}"><img th:src="${line.imgUrl}"></a>
+        <figcaption>
+            <div class="tour_title" th:text="${line.pdescribe}">
+                <strong th:text="'&lt;'+${line.city}+${line.name}+'&gt;'"></strong>
+            </div>
+            <div class="info">
+                <span class="price"> ￥<strong th:text="${line.price}"> </strong> 起</span>
+            </div>
+        </figcaption>
+    </figure>
+</div>
+
+
+<div th:include="foot"></div>
+</body>
+</html>

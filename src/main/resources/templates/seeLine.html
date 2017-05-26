@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>山科旅行社</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:include="head"></div>
+<div id="headline">
+    <img th:src="@{/img/headline.jpg}">
+    <hgroup>
+        <h2>风景欣赏</h2>
+    </hgroup>
+</div>
+<div id="container">
+    <aside class="sidebar">
+        <div class="sidebox recommend">
+            <h2>导游推荐</h2>
+            <div class="tag">
+                <ul>
+                    <li th:each="gu:${guiders}"><a th:href="'/seeGuider?gid='+${gu.id}" th:text="${gu.name}">名字</a></li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <div class="list scenery">
+        <h1 th:text="${line.city}+'-'+${line.name}"></h1>
+        <p><img th:src="${line.imgUrl}"></p>
+        <p th:text="${line.pdescribe}"></p>
+        <h3 th:text="'参考费用:'+${line.price}+' RMB'"></h3>
+        <p th:text="'建议:'+${line.suggestion}"></p>
+        <a th:href="'/user/addLineIlike?id='+${line.id}"><h2 style="color:red"
+                                                             th:text="${select_stat?'取消收藏':'收藏'}"></h2></a>
+    </div>
+</div>
+
+<div th:include="foot"></div>
+</body>
+</html>

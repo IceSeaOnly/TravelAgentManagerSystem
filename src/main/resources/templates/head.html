@@ -1,0 +1,14 @@
+<header id="header" xmlns:th="http://www.thymeleaf.org">
+    <div class="center">
+        <h1 class="logo">山科旅行社</h1>
+        <nav class="link" >
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/lines">旅游资讯</a></li>
+                <li><a href="/guiders">导游风采</span></a></li>
+                <li><a href="/user/ucenter" th:text="${session.user == null?'登陆':session.user.name+session.usertype}"><span class="xs-hidden"></span></a></li>
+                <li><a href="/adminLogin" th:text="${session.usertype == null || session.usertype=='(游客)'?'管理登录':''}"></span></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>

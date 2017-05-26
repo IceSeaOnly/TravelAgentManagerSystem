@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta xmlns:th="http://www.thymeleaf.org">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>导游中心</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:include="head"></div>
+
+<div id="headline">
+    <img th:src="@{/img/headline.jpg}" alt="">
+    <hgroup>
+        <h2>导游中心</h2>
+    </hgroup>
+</div>
+<div id="container">
+    <form th:action="'/guider/guiderModify?gid='+${guider.id}" method="post">
+    <div class="list scenery">
+        <h1 th:text="'修改'+${guider.name}+'的信息'"></h1><br><br>
+        <p th:text="'手机号：'+${guider.phone}"></p>
+        <p><span>账户名：</span><input name="account" th:value="${guider.account}"/></p>
+        <p><span>用户名：</span><input name="name" th:value="${guider.name}"/></p>
+        <p><span>头&nbsp&nbsp&nbsp像：</span><input name="img" th:value="${guider.img}"/></p>
+        <p><span>描&nbsp&nbsp&nbsp述：</span><textarea name="desc" th:text="${guider.pdescribe}"></textarea></p>
+        <br>
+        <input type="submit"/>
+    </div>
+    </form>
+</div>
+
+<div th:include="foot"></div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>山科旅行社</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:include="head"></div>
+<div id="headline">
+    <img th:src="@{/img/headline.jpg}" alt="">
+    <hgroup>
+        <h2>搜索结果</h2>
+    </hgroup>
+</div>
+
+<div id="container">
+    <div class="list information">
+        <h2 style="margin:0 0 20px 0" th:text="'搜索结果（共'+${lines.size()}+'条）'"></h2>
+        <figure class="tour" th:each="line:${lines}">
+            <img th:src="${line.imgUrl}">
+            <figcaption>
+                <article>
+                    <header>
+                        <hgroup>
+                            <h2 th:text="${line.city}+'-'+${line.name}"></h2>
+                            <h3 class="xs-hidden" th:text="${line.pdescribe}"></h3>
+                        </hgroup>
+                    </header>
+
+                    <div class="buy">
+                        <div class="price">￥<strong th:text="${line.price}"></strong></div>
+                        <div class="reserve md-hidden"><a th:href="'/seeLine?lid='+${line.id}">立即查看</a></div>
+                    </div>
+
+                </article>
+            </figcaption>
+        </figure>
+    </div>
+</div>
+<div th:include="foot"></div>
+
+</body>
+</html>

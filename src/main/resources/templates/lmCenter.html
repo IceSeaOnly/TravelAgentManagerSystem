@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta xmlns:th="http://www.thymeleaf.org">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>线路管理员</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:include="head"></div>
+
+<div id="headline">
+    <img th:src="@{/img/headline.jpg}" alt="">
+    <hgroup>
+        <h2>线路管理员</h2>
+    </hgroup>
+</div>
+<div id="container">
+    <aside class="sidebar">
+        <div class="sidebox recommend">
+            <h2>添加线路</h2>
+            <form action="/lm/addLine" method="post">
+                <li>城市：<input name="city"/></li>
+                <li>名称：<input name="name"/></li>
+                <li>价格：<input name="price"/></li>
+                <li>图片：<input name="img"/></li>
+                <li>建议：<input name="sugg"/></li>
+                <li>描述：<textarea name="desc"></textarea></li>
+                <br>
+                <input type="submit"/>
+            </form>
+        </div>
+    </aside>
+    <div class="list information">
+        <h2 style="margin:0 0 20px 0" th:text="'所有线路（共'+${lines.size()}+'条）'"></h2>
+        <figure class="tour" th:each="line:${lines}">
+            <img th:src="${line.imgUrl}">
+            <figcaption>
+                <article>
+                    <header>
+                        <hgroup>
+                            <h2 th:text="${line.city}+'-'+${line.name}"></h2>
+                            <h3 class="xs-hidden" th:text="${line.pdescribe}"></h3>
+                        </hgroup>
+                    </header>
+
+                    <div class="buy">
+                        <div class="price">￥<strong th:text="${line.price}"></strong></div>
+                        <div class="reserve md-hidden"><a th:href="'/seeLine?lid='+${line.id}">立即查看</a></div>
+                    </div>
+                    <div class="disc xq-hidden"><a th:href="'/lm/delete?lid='+${line.id}"><span style="color: red">删除</span></a> </div>
+                </article>
+            </figcaption>
+        </figure>
+    </div>
+</div>
+
+<div th:include="foot"></div>
+</body>
+</html>

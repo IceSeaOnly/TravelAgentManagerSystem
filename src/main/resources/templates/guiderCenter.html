@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta xmlns:th="http://www.thymeleaf.org">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>导游中心</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:include="head"></div>
+
+<div id="headline">
+    <img th:src="@{/img/headline.jpg}" alt="">
+    <hgroup>
+        <h2>导游中心</h2>
+    </hgroup>
+</div>
+<div id="container">
+    <aside class="sidebar">
+        <div class="sidebox recommend">
+            <h2>添加导游</h2>
+            <form action="/guider/addGuider" method="post">
+                <li>姓名：<input name="name"/></li>
+                <li>手机：<input name="phone"/></li>
+                <li>密码：<input name="pass"/></li>
+                <li>头像：<input name="img"/></li>
+                <li>描述：<textarea name="desc"></textarea></li>
+                <br>
+                <input type="submit"/>
+            </form>
+        </div>
+    </aside>
+    <div class="list scenery">
+        <h1>我的资料</h1>
+        <br><br>
+        <p><img th:src="${session.user.img}"/></p>
+        <p th:text="'账户名：'+${session.user.account}"></p>
+        <p th:text="'用户名：'+${session.user.name}"></p>
+        <p th:text="'手机号：'+${session.user.phone}"></p>
+        <p th:text="'描&nbsp&nbsp述：'+${session.user.pdescribe}"></p>
+        <a th:href="'/guider/modifyGuider?gid='+${session.user.id}" ><h3 style="color: red">修改我的资料</h3></a>
+        <p>--------------------------------------------------------------</p>
+        <h1>其他用户</h1><br>
+        <div>
+            <li th:each="gu:${guiders}">
+                <span th:text="${gu.name}+' '+${gu.phone}+' '"></span>
+                <a th:href="'/seeGuider?gid='+${gu.id}" style="color:orange">查看</a>
+                <a th:href="'/guider/modifyGuider?gid='+${gu.id}" style="color:green">修改</a>
+                <a th:href="'/guider/deleteGuider?gid='+${gu.id}" style="color:red">删除</a>
+            </li>
+        </div>
+    </div>
+</div>
+
+<div th:include="foot"></div>
+</body>
+</html>

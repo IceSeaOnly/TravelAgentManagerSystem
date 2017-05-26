@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>山科旅行社</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:include="head"></div>
+<div id="headline">
+    <img th:src="@{/img/headline.jpg}">
+    <hgroup>
+        <h2>风景欣赏</h2>
+    </hgroup>
+</div>
+<div id="container">
+    <div class="list scenery">
+        <section>
+            <h2>风景欣赏</h2>
+            <figure th:each="line:${lines}">
+                <a th:href="'/seeLine?lid='+${line.id}"><img th:src="${line.imgUrl}"></a>
+                <figcaption th:text="${line.city}+'-'+${line.name}"></figcaption>
+            </figure>
+        </section>
+    </div>
+</div>
+
+<div th:include="foot"></div>
+</body>
+</html>

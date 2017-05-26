@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta xmlns:th="http://www.thymeleaf.org">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>查看导游</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:include="head"></div>
+
+<div id="headline">
+    <img th:src="@{/img/headline.jpg}" alt="">
+    <hgroup>
+        <h2>查看导游</h2>
+    </hgroup>
+</div>
+<div id="container">
+    <aside class="sidebar">
+        <div class="sidebox hot">
+            <h2></h2>
+            <div class="figure">
+                <figure>
+                    <img th:src="${guider.img}">
+                    <figcaption th:text="${guider.name}"></figcaption>
+                </figure>
+            </div>
+        </div>
+        <div class="sidebox hot">
+            <h2>ta推荐的景点</h2>
+            <div class="figure">
+                <figure th:each="line:${lines}">
+                    <a th:href="'/seeLine?lid='+${line.id}"><img th:src="${line.imgUrl}"></a>
+                    <figcaption th:text="${line.city+'-'+line.name}"></figcaption>
+                </figure>
+            </div>
+        </div>
+    </aside>
+    <div class="list scenery">
+        <h1>导游资料</h1><br><br>
+        <p th:text="'账户名：'+${guider.account}"></p>
+        <p th:text="'用户名：'+${guider.name}"></p>
+        <p th:text="'手机号：'+${guider.phone}"></p>
+        <p th:text="'描&nbsp&nbsp&nbsp述：'+${guider.pdescribe}"></p>
+    </div>
+    <div>
+        <a th:href="'/user/addGLike?gid='+${guider.id}"><h2 style="color: red" th:text="${like_stat?'取消喜欢':'喜欢ta'}"></h2></a>
+    </div>
+</div>
+
+<div th:include="foot"></div>
+</body>
+</html>

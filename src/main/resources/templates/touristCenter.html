@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta xmlns:th="http://www.thymeleaf.org">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>个人中心</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:include="head"></div>
+
+<div id="headline">
+    <img th:src="@{/img/headline.jpg}" alt="">
+    <hgroup>
+        <h2>个人中心</h2>
+    </hgroup>
+</div>
+<div id="container">
+    <aside class="sidebar">
+        <div class="sidebox recommend">
+            <h2>我喜欢的导游</h2>
+            <div class="tag">
+                <ul>
+                    <li th:each="gu:${guiders}"><a th:href="'/seeGuider?gid='+${gu.id}" th:text="${gu.name}">名字</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="sidebox hot">
+            <h2>我收藏的景点</h2>
+            <div class="figure">
+                <figure th:each="line:${lines}">
+                    <a th:href="'/seeLine?lid='+${line.id}"><img th:src="${line.imgUrl}"></a>
+                    <figcaption th:text="${line.city+'-'+line.name}"></figcaption>
+                </figure>
+            </div>
+        </div>
+
+    </aside>
+    <div class="list scenery">
+        <h1>用户资料</h1><br><br>
+        <p th:text="'账户名：'+${session.user.account}"></p>
+        <p th:text="'用户名：'+${session.user.name}"></p>
+        <p th:text="'手机号：'+${session.user.phone}"></p>
+    </div>
+</div>
+
+<div th:include="foot"></div>
+</body>
+</html>

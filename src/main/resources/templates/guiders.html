@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>山河旅行社</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:include="head"></div>
+<div id="headline">
+    <img th:src="@{/img/guidersBanner.jpg}" alt="">
+    <hgroup>
+        <h2 style="color:#179aff">导游风采</h2>
+    </hgroup>
+</div>
+<div id="container">
+
+    <div class="list scenery">
+        <section>
+            <h2>导游风采（点击收藏）</h2>
+            <figure th:each="gu:${guiders}">
+                <a th:href="'/seeGuider?gid='+${gu.id}"><img th:src="${gu.img}"></a>
+                <figcaption th:text="${gu.name}"></figcaption>
+            </figure>
+        </section>
+    </div>
+</div>
+<div th:include="foot"></div>
+</body>
+</html>
